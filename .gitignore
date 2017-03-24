@@ -2,6 +2,7 @@
 
 # Webstorm
 .idea/
+vcs.xml
 
 # dependencies
 /node_modules
