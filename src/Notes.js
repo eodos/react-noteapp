@@ -6,7 +6,7 @@ import './Notes.css';
 function ListItem(props) {
 	return (
 		<div className="Note">
-			<ContentEditable html={props.item} disabled={false} onChange={props.onChange} />
+			<ContentEditable className="noteData" html={props.item} disabled={false} onChange={props.onChange} />
 			<div className="removeIcon" onClick={props.remove}><FontAwesome name="remove" /></div>
 		</div>
 	)
