@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="Header"
+  >
+    <h1>
+      Note App
+    </h1>
+  </div>
+  <div
+    className="Notes"
+  >
+    <input
+      className="form-control"
+      id="addNote"
+      onKeyDown={[Function]}
+      placeholder="add new note"
+      type="text"
+    />
+    <button
+      className="btn btn-default"
+      id="addNoteButton"
+      onClick={[Function]}
+      type="button"
+    >
+      Add
+    </button>
+    <div>
+      <div
+        className="Note"
+      >
+        <div
+          className="noteData"
+          contentEditable={true}
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "Hello World!",
+            }
+          }
+          disabled={false}
+          onBlur={[Function]}
+          onChange={[Function]}
+          onInput={[Function]}
+        />
+        <div
+          className="removeIcon"
+          onClick={[Function]}
+        >
+          <span
+            aria-hidden={true}
+            className="fa fa-remove"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="Footer"
+  >
+    by David
+  </div>
+</div>
+`;
