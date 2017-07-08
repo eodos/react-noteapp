@@ -21,13 +21,20 @@ class Notes extends Component {
 	}
 
 	addNote() {
-		let val = document.getElementById('addNote').value;
+		let value = document.getElementById('addNote').value;
 		document.getElementById('addNote').value = '';
-		if (val) {
+		if (value) {
 			let newList = this.state.notes.slice();
-			newList.push(val);
+			newList.push(value);
 			this.setState({notes: newList});
 		}
+	}
+
+	modifyNote(i) {
+		let value = document.getElementsByClassName('noteData')[i].innerHTML;
+		let newList = this.state.notes.slice();
+		newList[i] = value;
+		this.setState({notes: newList});
 	}
 
 	removeNote(i) {
@@ -41,7 +48,7 @@ class Notes extends Component {
 	render() {
 		let listItems = [];
 		this.state.notes.forEach((item, i) => {
-			listItems.push(<ListItem item={item} remove={() => this.removeNote(i)} />)
+			listItems.push(<ListItem item={item} key={i} remove={() => this.removeNote(i)} onChange={() => this.modifyNote(i)} />)
 		});
 		return (
 			<div className="Notes">
