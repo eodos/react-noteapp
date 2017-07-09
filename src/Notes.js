@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Collapse, Well } from 'react-bootstrap';
 import Note from './Note';
 import './Notes.css';
 
@@ -7,18 +8,22 @@ class Notes extends Component {
 		super(props);
 		this.state = {
 			notes: [{ id: 1, title: 'Hello World!', content: 'Today is gonna be a good day!' }],
-			next_id: 2
+			next_id: 2,
+			collapsableOpen: false
 		};
 	}
 
 	addNote() {
-		let value = document.getElementById('addNote').value;
-		document.getElementById('addNote').value = '';
-		if (value) {
-			let newList = this.state.notes.slice();
-			newList.push({ id: this.state.next_id++, title: value });
-			this.setState({ notes: newList });
-		}
+		let title = document.getElementById('addNoteTitle').value;
+		let content = document.getElementById('addNoteContent').value;
+		document.getElementById('addNoteTitle').value = '';
+		document.getElementById('addNoteContent').value = '';
+		!title ? (title = 'Untitled') : null;
+		let newList = this.state.notes.slice();
+		newList.push({ id: this.state.next_id++, title: title, content: content });
+		this.setState({ notes: newList });
+		document.getElementById('addNoteTitle').placeholder = 'add new note';
+		this.setState({ collapsableOpen: false });
 	}
 
 	modifyNote(i) {
@@ -54,12 +59,27 @@ class Notes extends Component {
 		return (
 			<div className="Notes">
 				<input
-					id="addNote"
+					id="addNoteTitle"
 					type="text"
 					className="form-control"
 					placeholder="add new note"
 					onKeyDown={this.handleKeyDown}
+					onClick={() => {
+						this.setState({ collapsableOpen: true });
+						document.getElementById('addNoteTitle').placeholder = 'title';
+					}}
 				/>
+				<Collapse in={this.state.collapsableOpen}>
+					<div>
+						<input
+							id="addNoteContent"
+							type="text"
+							className="form-control"
+							placeholder="content"
+							onKeyDown={this.handleKeyDown}
+						/>
+					</div>
+				</Collapse>
 				<button
 					id="addNoteButton"
 					type="button"

@@ -21,6 +21,10 @@ class Note extends Component {
 		this.setState({ showModal: true });
 	}
 
+	handleKeyDown(e) {
+		e.keyCode === 13 ? document.getElementById('formSubmit').click() : null;
+	}
+
 	render() {
 		return (
 			<div className="Note">
@@ -44,7 +48,11 @@ class Note extends Component {
 									Title
 								</Col>
 								<Col sm={10}>
-									<FormControl type="text" defaultValue={this.props.title} />
+									<FormControl
+										type="text"
+										defaultValue={this.props.title}
+										onKeyDown={this.handleKeyDown}
+									/>
 								</Col>
 							</FormGroup>
 
@@ -53,13 +61,18 @@ class Note extends Component {
 									Content
 								</Col>
 								<Col sm={10}>
-									<FormControl type="text" defaultValue={this.props.content} />
+									<FormControl
+										type="text"
+										defaultValue={this.props.content}
+										onKeyDown={this.handleKeyDown}
+									/>
 								</Col>
 							</FormGroup>
 						</Form>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button
+							id="formSubmit"
 							onClick={() => {
 								this.props.onChange();
 								this.close();

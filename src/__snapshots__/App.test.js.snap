@@ -16,11 +16,24 @@ exports[`renders correctly 1`] = `
   >
     <input
       className="form-control"
-      id="addNote"
+      id="addNoteTitle"
+      onClick={[Function]}
       onKeyDown={[Function]}
       placeholder="add new note"
       type="text"
     />
+    <div
+      aria-expanded={null}
+      className="collapse"
+    >
+      <input
+        className="form-control"
+        id="addNoteContent"
+        onKeyDown={[Function]}
+        placeholder="content"
+        type="text"
+      />
+    </div>
     <button
       className="btn btn-default"
       id="addNoteButton"
