@@ -1,29 +1,12 @@
 import React, { Component } from 'react';
-import FontAwesome from 'react-fontawesome';
-import ContentEditable from 'react-contenteditable';
+import Note from './Note';
 import './Notes.css';
-
-function ListItem(props) {
-	return (
-		<div className="Note">
-			<ContentEditable
-				className="noteData"
-				html={props.title}
-				disabled={false}
-				onChange={props.onChange}
-			/>
-			<div className="removeIcon" onClick={props.remove}>
-				<FontAwesome name="remove" />
-			</div>
-		</div>
-	);
-}
 
 class Notes extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			notes: [{ id: 1, title: 'Hello World!' }],
+			notes: [{ id: 1, title: 'Hello World!', content: 'Today is gonna be a good day!' }],
 			next_id: 2
 		};
 	}
@@ -59,9 +42,10 @@ class Notes extends Component {
 		let listItems = [];
 		this.state.notes.forEach((item, i) => {
 			listItems.push(
-				<ListItem
+				<Note
 					key={item.id}
 					title={item.title}
+					content={item.content}
 					remove={() => this.removeNote(i)}
 					onChange={() => this.modifyNote(i)}
 				/>

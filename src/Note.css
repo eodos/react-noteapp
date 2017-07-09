@@ -1,0 +1,19 @@
+.Note {
+	margin-top: 20px;
+	padding: 10px 0 10px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.noteData {
+	border: 3px solid black;
+	padding: 5px;
+	float: left;
+	width: 95%;
+}
+
+.removeIcon {
+	float: right;
+	width: 5%;
+}
