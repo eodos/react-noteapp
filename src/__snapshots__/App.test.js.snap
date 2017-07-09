@@ -35,17 +35,15 @@ exports[`renders correctly 1`] = `
       >
         <div
           className="noteData"
-          contentEditable={true}
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "Hello World!",
-            }
-          }
-          disabled={false}
-          onBlur={[Function]}
-          onChange={[Function]}
-          onInput={[Function]}
-        />
+          onClick={[Function]}
+        >
+          <h4>
+            Hello World!
+          </h4>
+          <p>
+            Today is gonna be a good day!
+          </p>
+        </div>
         <div
           className="removeIcon"
           onClick={[Function]}
