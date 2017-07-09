@@ -39,7 +39,7 @@ class Note extends Component {
 				<Modal show={this.state.showModal} onHide={this.close}>
 					<Modal.Body>
 						<Form horizontal>
-							<FormGroup controlId="formHorizontalTitle">
+							<FormGroup controlId="formTitle">
 								<Col componentClass={ControlLabel} sm={2}>
 									Title
 								</Col>
@@ -48,7 +48,7 @@ class Note extends Component {
 								</Col>
 							</FormGroup>
 
-							<FormGroup controlId="formHorizontalContent">
+							<FormGroup controlId="formContent">
 								<Col componentClass={ControlLabel} sm={2}>
 									Content
 								</Col>
@@ -61,7 +61,7 @@ class Note extends Component {
 					<Modal.Footer>
 						<Button
 							onClick={() => {
-								// this.props.update();
+								this.props.onChange();
 								this.close();
 							}}
 						>

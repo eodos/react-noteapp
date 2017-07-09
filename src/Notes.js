@@ -22,9 +22,9 @@ class Notes extends Component {
 	}
 
 	modifyNote(i) {
-		let value = document.getElementsByClassName('noteData')[i].innerHTML;
 		let newList = this.state.notes.slice();
-		newList[i].title = value;
+		newList[i].title = document.getElementById('formTitle').value;
+		newList[i].content = document.getElementById('formContent').value;
 		this.setState({ notes: newList });
 	}
 
