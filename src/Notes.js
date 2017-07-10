@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { Collapse } from 'react-bootstrap';
+import { withCookies } from 'react-cookie';
 import Note from './Note';
 import './Notes.css';
 
 class Notes extends Component {
 	constructor(props) {
 		super(props);
+		const { cookies } = this.props;
 		this.state = {
-			notes: [{ id: 1, title: 'Hello World!', content: 'Today is gonna be a good day!' }],
-			next_id: 2,
+			notes: cookies.get('notes') || [
+				{ id: 1, title: 'Hello World!', content: 'Today is gonna be a good day!' }
+			],
+			next_id: cookies.get('next_id') || 2,
 			collapsableOpen: false
 		};
 		this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -19,8 +23,12 @@ class Notes extends Component {
 		let content = document.getElementById('addNoteContent').value;
 		if (title || content) {
 			let newList = this.state.notes.slice();
-			newList.push({ id: this.state.next_id++, title: title, content: content });
+			newList.push({ id: this.state.next_id, title: title, content: content });
+			const { cookies } = this.props;
+			cookies.set('notes', newList, { path: '/' });
+			cookies.set('next_id', this.state.next_id + 1);
 			this.setState({ notes: newList });
+			this.setState({ next_id: this.state.next_id + 1 });
 			this.closeCollapsable();
 		}
 	}
@@ -29,12 +37,16 @@ class Notes extends Component {
 		let newList = this.state.notes.slice();
 		newList[i].title = document.getElementById('formTitle').value;
 		newList[i].content = document.getElementById('formContent').value;
+		const { cookies } = this.props;
+		cookies.set('notes', newList, { path: '/' });
 		this.setState({ notes: newList });
 	}
 
 	removeNote(i) {
 		let newList = this.state.notes.slice();
 		newList.splice(i, 1);
+		const { cookies } = this.props;
+		cookies.set('notes', newList, { path: '/' });
 		this.setState({ notes: newList });
 	}
 
@@ -107,4 +119,4 @@ class Notes extends Component {
 	}
 }
 
-export default Notes;
+export default withCookies(Notes);
