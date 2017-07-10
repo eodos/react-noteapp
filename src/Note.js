@@ -9,26 +9,29 @@ class Note extends Component {
 		this.state = {
 			showModal: false
 		};
-		this.open = this.open.bind(this);
-		this.close = this.close.bind(this);
+		this.openModal = this.openModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
-	close() {
+	closeModal() {
 		this.setState({ showModal: false });
 	}
 
-	open() {
+	openModal() {
 		this.setState({ showModal: true });
 	}
 
 	handleKeyDown(e) {
-		e.keyCode === 13 ? document.getElementById('formSubmit').click() : null;
+		e.keyCode === 13
+			? document.getElementById('formSubmit').click()
+			: e.keyCode === 27 ? this.closeModal() : null;
 	}
 
 	render() {
 		return (
 			<div className="Note">
-				<div className="noteData" onClick={this.open}>
+				<div className="noteData" onClick={this.openModal}>
 					<h4>
 						{this.props.title}
 					</h4>
@@ -40,7 +43,7 @@ class Note extends Component {
 					<FontAwesome name="remove" />
 				</div>
 
-				<Modal show={this.state.showModal} onHide={this.close}>
+				<Modal show={this.state.showModal} onHide={this.closeModal}>
 					<Modal.Body>
 						<Form horizontal>
 							<FormGroup controlId="formTitle">
@@ -75,12 +78,12 @@ class Note extends Component {
 							id="formSubmit"
 							onClick={() => {
 								this.props.onChange();
-								this.close();
+								this.closeModal();
 							}}
 						>
 							Save
 						</Button>
-						<Button onClick={this.close}>Close</Button>
+						<Button onClick={this.closeModal}>Close</Button>
 					</Modal.Footer>
 				</Modal>
 			</div>

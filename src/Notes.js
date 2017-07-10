@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Collapse, Well } from 'react-bootstrap';
+import { Collapse } from 'react-bootstrap';
 import Note from './Note';
 import './Notes.css';
 
@@ -11,19 +11,18 @@ class Notes extends Component {
 			next_id: 2,
 			collapsableOpen: false
 		};
+		this.handleKeyDown = this.handleKeyDown.bind(this);
 	}
 
 	addNote() {
 		let title = document.getElementById('addNoteTitle').value;
 		let content = document.getElementById('addNoteContent').value;
-		document.getElementById('addNoteTitle').value = '';
-		document.getElementById('addNoteContent').value = '';
-		!title ? (title = 'Untitled') : null;
-		let newList = this.state.notes.slice();
-		newList.push({ id: this.state.next_id++, title: title, content: content });
-		this.setState({ notes: newList });
-		document.getElementById('addNoteTitle').placeholder = 'add new note';
-		this.setState({ collapsableOpen: false });
+		if (title || content) {
+			let newList = this.state.notes.slice();
+			newList.push({ id: this.state.next_id++, title: title, content: content });
+			this.setState({ notes: newList });
+			this.closeCollapsable();
+		}
 	}
 
 	modifyNote(i) {
@@ -40,7 +39,17 @@ class Notes extends Component {
 	}
 
 	handleKeyDown(e) {
-		e.keyCode === 13 ? document.getElementById('addNoteButton').click() : null;
+		e.keyCode === 13
+			? document.getElementById('addNoteButton').click()
+			: e.keyCode === 27 ? this.closeCollapsable() : null;
+	}
+
+	closeCollapsable() {
+		this.setState({ collapsableOpen: false });
+		document.getElementById('addNoteTitle').value = '';
+		document.getElementById('addNoteContent').value = '';
+		document.getElementById('addNoteTitle').placeholder = 'add new note';
+		document.activeElement.blur();
 	}
 
 	render() {
