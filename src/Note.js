@@ -23,9 +23,11 @@ class Note extends Component {
 	}
 
 	handleKeyDown(e) {
-		e.keyCode === 13
-			? document.getElementById('formSubmit').click()
-			: e.keyCode === 27 ? this.closeModal() : null;
+		if (e.keyCode === 13) {
+			document.getElementById('formSubmit').click();
+		} else if (e.keyCode === 27) {
+			this.closeModal();
+		}
 	}
 
 	render() {

@@ -39,9 +39,11 @@ class Notes extends Component {
 	}
 
 	handleKeyDown(e) {
-		e.keyCode === 13
-			? document.getElementById('addNoteButton').click()
-			: e.keyCode === 27 ? this.closeCollapsable() : null;
+		if (e.keyCode === 13) {
+			document.getElementById('addNoteButton').click();
+		} else if (e.keyCode === 27) {
+			this.closeCollapsable();
+		}
 	}
 
 	closeCollapsable() {
